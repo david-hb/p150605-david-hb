@@ -1,6 +1,12 @@
 package p20150605;
 
 import java.io.File;
+/**
+ * Clase destinada a la gestion de cuñas de anuncios publicitarios en radio
+ * 
+ * @author David
+ * @version 1.0.1
+ */
 
 public class AudioSpot
 {
@@ -9,8 +15,20 @@ public class AudioSpot
     private String producto;    // nombre del producto anunciado
     private String anunciante;  // nombre de la empresa anunciante
     
-    public String lasterrormsg;
+    public String lasterrormsg; //donde almacenamos la descripcion de error.
+    /*Los error que se pueden producir
+    Si no se produjo ningun problema. Retorna 0
+    Si no se establece duracion. Retorna -1
+    Si no se ha indicado el nombre del producto anunciado. Retorna -2
+    Si no se ha establecido el archivo de audio. Retorna -3
+    Si no se ha establecido el archivo de audio. Retorna -4
+    Si se produjo una excepcion. Retorna -5
+    */
     
+    
+    /**
+     * Constructor de AudioSpot.
+     */
     public AudioSpot ()
     {
         this.archivo = null;
@@ -20,12 +38,24 @@ public class AudioSpot
         this.lasterrormsg = "";
     }
     
+    /**
+     * El metodo establece los metadatos del spot.
+     * 
+     * @param producto  Indicamos el nombre del producto.
+     * @param anunciante Indica el nombre del anumciante.
+     */
     public void setMetaDatos (String producto, String anunciante)
     {
         this.producto = producto;
         this.anunciante = anunciante;
     }
     
+    /**
+     * El metodo establece la duracion del spot.
+     * 
+     * @param duracion Indica la duracion que tinen el spot.
+     * @throws IllegalArgumentException Excepcion que se producira al sobre pasar el limite.
+     */
     public void setDuracion(int duracion) throws IllegalArgumentException
     {
         if (duracion<0)
@@ -35,12 +65,25 @@ public class AudioSpot
         this.duracion = duracion;
     }
     
+    /**
+     * El metodo comprueba que el archivo que contiene el audio existe.
+     * 
+     * @param nombre_archivo Nombre del archivo que contiene el audio.
+     * @return Retorna un booleano que indica si el archivo existe.
+     */
     public Boolean setArchivo(String nombre_archivo)
     {
         this.archivo = new File(nombre_archivo);
         return this.archivo.exists();
     }
     
+    /**
+     * El metodo se encarga de comprobar que no falta nada, si se produgera un error
+     * genera un codigo de error.
+     * 
+     * @param cola_reproduccion Es la lista de anuncios a reproducir.
+     * @return Retorna el valor resultado de la comprobacion.
+     */
     public int ProgramaEnCola(Object cola_reproduccion)
     {
         // comprobamos previamente que no falte nada
@@ -84,6 +127,14 @@ public class AudioSpot
         else
             return resultado;
     }
+    
+    /**
+     * El metodo se encarga de comprobar que no falta nada, si se produgera un error
+     * genera un codigo de error si no exporta a formato daw.
+     * 
+     * @param objeto_daw Objeto a exportar a formato daw.
+     * @return Retorna el valor resultado de la comprobacion.
+     */
     
     public int ExportaAFormatoDAW(Object objeto_daw)
     {
