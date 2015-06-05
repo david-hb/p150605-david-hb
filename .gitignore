@@ -41,3 +41,9 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+#ignorar las carpetas dist y buil y los archivos .mp3 y wav
+dist/
+build/
+*.mp3
+*.wav
